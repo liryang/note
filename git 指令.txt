@@ -1,0 +1,104 @@
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+$ mkdir <name> 生成新版本库
+$ cd <name> 进入
+$ pwd 当前目录
+
+$ cat <name>.txt 读取信息
+
+$ git add <name>.txt 添加文件到缓存区
+$ git commit -m "wrote a <name> file" 更新版本库，-m后面加备注
+
+$ git statu 获取版本库状态
+$ git diff <name>.txt 获取不同
+
+
+$ git log 查看历史记录
+$ git reset --hard HEAD^ 返回某个版本 --hard为指针 ^回到上一个
+$ git reflog 查看历史命令记录
+
+$ git checkout -- <name>.txt 
+把<name>.txt文件在工作区的修改全部撤销，这里有两种情况：
+一种是<name>.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是<name>.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+
+$ rm <name>.txt 删除文件
+
+$ git remote add origin http:192.168.88.227/szy/<name>.git  添加地址
+$ git push origin master 上传
+
+$ git clone http:192.168.88.227/szy/<name>.git 下载版本库
+
+$ git checkout -b <name> 创建dev分支，然后切换到dev分支，-b参数表示创建并切换
+相当于：
+$ git branch <name>
+$ git checkout <name>
+
+$ git checkout -d <name> 删除dev分支
+
+$ git branch 查看当前分支，git branch命令会列出所有分支，当前分支前面会标一个*号
+
+$ git merge <name> 合并指定分支到当前分支 --no-ff不使用Fast forward快速合并，因为删除分支后，会丢掉分支信息
+
+$ git log --graph --pretty=oneline --abbrev-commit查看分支合并图
+
+$ git stash  暂存当前工作区
+$ git stash list 暂存列表
+$ git stash apply 读取暂存
+$ git stash drop 删除暂存
+$ git stash pop 读取并删除暂存
+
+$ git branch -D <name> 如果要丢弃一个没有被合并过的分支，可以通过强行删除
+
+$ git remote -v 查看远程库的信息
+
+$ git branch --set-upstream-to <branch-name> origin/<branch-name> 创建本地分支和远程分支的链接关系
+
+$ git rebase 操作可以把本地未push的分叉提交历史整理成直线
+
+$ git tag <name> 做标签
+$ git tag -a <tagname> -m "blablabla..."可以指定标签信息
+$ git tag 查标签
+
+$ git push origin <tagname>可以推送一个本地标签；
+
+$ git push origin --tags可以推送全部未推送过的本地标签；
+
+$ git tag -d <tagname>可以删除一个本地标签；
+
+$ git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+gitlab:
+Command line instructions 
+
+Git global setup
+git config --global user.name "Sun zhiyong"
+git config --global user.email "463237444@qq.com"
+
+Create a new repository
+git clone http://192.168.88.227/szy/test.git
+cd test
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+Existing folder
+cd existing_folder
+git init
+git remote add origin http://192.168.88.227/szy/test.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+Existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin http://192.168.88.227/szy/test.git
+git push -u origin --all
+git push -u origin --tags
+
+
